@@ -49,14 +49,14 @@ export default function CongratsPage({ email }: { email: string }) {
             </svg>
           </div>
           <h1 className="font-manrope font-semibold mt-[28px] text-[clamp(34px,6vw,52px)] text-black tracking-[-0.05em]">
-            You&apos;re subscribed!
+            You&apos;re on the list.
           </h1>
           <p className="font-inter mt-[12px] text-[17px] sm:text-[19px] text-[#202020] tracking-[-0.02em]">
-            Thanks for joining our newsletter.
+            We&apos;re coming soon. We&apos;ll let you know.
             {email && (
               <>
                 {" "}
-                We&apos;ll send updates to <span className="font-semibold">{email}</span> whenever there&apos;s something new from Plucia.
+                Updates will go to <span className="font-semibold">{email}</span>.
               </>
             )}
           </p>
@@ -78,12 +78,12 @@ export default function CongratsPage({ email }: { email: string }) {
                 <img alt="LinkedIn" className="absolute block inset-0 max-w-none size-full" src="/assets/icons/linkedin-02.svg" />
               </div>
             </a>
-            <a href="#" aria-label="Instagram" className="bg-[#1b1819] flex items-center justify-center relative rounded-[40px] shrink-0 size-[40px] transition-transform duration-200 hover:-translate-y-0.5">
+            <a href="https://www.instagram.com/_plucia_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="bg-[#1b1819] flex items-center justify-center relative rounded-[40px] shrink-0 size-[40px] transition-transform duration-200 hover:-translate-y-0.5">
               <div className="relative shrink-0 size-[16px]">
                 <img alt="Instagram" className="absolute block inset-0 max-w-none size-full" src="/assets/icons/instagram-footer.svg" />
               </div>
             </a>
-            <a href="https://x.com/plucia_ai?s=11" target="_blank" rel="noopener noreferrer" aria-label="X" className="bg-[#1b1819] flex items-center justify-center relative rounded-[40px] shrink-0 size-[40px] transition-transform duration-200 hover:-translate-y-0.5">
+            <a href="https://x.com/plucia_ai" target="_blank" rel="noopener noreferrer" aria-label="X" className="bg-[#1b1819] flex items-center justify-center relative rounded-[40px] shrink-0 size-[40px] transition-transform duration-200 hover:-translate-y-0.5">
               <div className="relative shrink-0 size-[16px]">
                 <img alt="X" className="absolute block inset-0 max-w-none size-full" src="/assets/icons/new-twitter.svg" />
               </div>

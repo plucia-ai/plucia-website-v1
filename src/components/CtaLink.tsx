@@ -5,7 +5,7 @@ import Link from "next/link";
  * gradient fill, hover lift, shine sweep) for use inside landing sections.
  */
 export default function CtaLink({
-  href = "/signup",
+  href = "/waitlist",
   children,
   className = "",
 }: {

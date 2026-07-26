@@ -1,4 +1,5 @@
 import Link from "next/link";
+import FooterFaqLink from "@/components/FooterFaqLink";
 
 /**
  * Footer — Figma 2877:22925.
@@ -36,7 +37,7 @@ export default function Footer() {
                 <Link href="/" className="relative shrink-0 w-full transition-opacity duration-200 hover:opacity-60">Home</Link>
                 <Link href="/contact" className="relative shrink-0 w-full transition-opacity duration-200 hover:opacity-60">Contact Us</Link>
                 <Link href="/careers" className="relative shrink-0 w-full transition-opacity duration-200 hover:opacity-60">Careers</Link>
-                <Link href="/contact" className="relative shrink-0 w-full transition-opacity duration-200 hover:opacity-60">FAQ</Link>
+                <FooterFaqLink className="relative shrink-0 w-full transition-opacity duration-200 hover:opacity-60" />
               </div>
             </div>
             <div className="flex flex-[1_0_0] flex-col gap-[24px] items-start min-w-px relative">
@@ -75,12 +76,12 @@ export default function Footer() {
                 <img alt="LinkedIn" className="absolute block inset-0 max-w-none size-full" src="/assets/icons/linkedin-02.svg" />
               </div>
             </a>
-            <a href="#" className="bg-[#1b1819] flex items-center justify-center relative rounded-[40px] shrink-0 size-[40px]">
+            <a href="https://www.instagram.com/_plucia_/" target="_blank" rel="noopener noreferrer" className="bg-[#1b1819] flex items-center justify-center relative rounded-[40px] shrink-0 size-[40px]">
               <div className="relative shrink-0 size-[16px]">
                 <img alt="Instagram" className="absolute block inset-0 max-w-none size-full" src="/assets/icons/instagram-footer.svg" />
               </div>
             </a>
-            <a href="https://x.com/plucia_ai?s=11" target="_blank" rel="noopener noreferrer" className="bg-[#1b1819] flex items-center justify-center relative rounded-[40px] shrink-0 size-[40px]">
+            <a href="https://x.com/plucia_ai" target="_blank" rel="noopener noreferrer" className="bg-[#1b1819] flex items-center justify-center relative rounded-[40px] shrink-0 size-[40px]">
               <div className="relative shrink-0 size-[16px]">
                 <img alt="X" className="absolute block inset-0 max-w-none size-full" src="/assets/icons/new-twitter.svg" />
               </div>

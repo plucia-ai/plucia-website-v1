@@ -12,13 +12,34 @@ export default function WaitlistForm() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const submit = () => {
+  const submit = async () => {
     if (!/^\S+@\S+\.\S+$/.test(email.trim())) {
       setError(true);
       return;
     }
-    router.push(`/congratulations?email=${encodeURIComponent(email.trim())}`);
+
+    setSubmitting(true);
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim(), source: "footer" }),
+      });
+
+      if (!response.ok) {
+        setError(true);
+        return;
+      }
+
+      router.push(`/congratulations?email=${encodeURIComponent(email.trim())}`);
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -43,6 +64,7 @@ export default function WaitlistForm() {
       </div>
       <button
         type="submit"
+        disabled={submitting}
         className="group flex gap-[10px] h-full items-center justify-center overflow-clip px-[20px] py-[10px] relative rounded-bl-[8px] rounded-br-[14px] rounded-tl-[8px] rounded-tr-[14px] shrink-0 cursor-pointer transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0px_0px_0px_0.8px_#161616,0px_10px_10px_-3px_rgba(0,0,0,0.22),0px_18px_18px_-3px_rgba(0,0,0,0.2),0px_36px_34px_-4px_rgba(0,0,0,0.12)]"
       >
         <div
@@ -58,7 +80,7 @@ export default function WaitlistForm() {
           <img alt="" className="absolute block inset-0 max-w-none size-full" src="/assets/icons/mail-send-01.svg" />
         </div>
         <p className="font-manrope font-semibold leading-[normal] relative shrink-0 text-[#fefefe] text-[16px] tracking-[-0.8px] whitespace-nowrap">
-          Subscribe 
+          {submitting ? "Subscribing…" : "Subscribe"}
         </p>
         <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_4px_7px_0px_rgba(255,255,255,0.2)]" />
       </button>

@@ -110,7 +110,7 @@ export default function SignupPage() {
 
   return (
     <main className="bg-white flex flex-col min-h-screen w-full">
-      <AuthHeader prompt="Already have an account?" linkText="Sign in" linkHref="/login" />
+      <AuthHeader prompt="Already have an account?" linkText="Sign in" linkHref="/waitlist" />
 
       <div className="flex flex-1 items-start sm:items-center justify-center px-[20px] pb-[80px] pt-[48px] sm:pt-0 w-full">
         <div className="w-full max-w-[480px]">

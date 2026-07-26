@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import LoginPage from "@/page/LoginPage";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Sign In — Plucia",
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <LoginPage />;
+  redirect("/waitlist");
 }

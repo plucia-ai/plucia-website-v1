@@ -19,14 +19,40 @@ export default function ContactPage() {
   const reduceMotion = useReducedMotion();
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
-  const update = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+  const update = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((f) => ({ ...f, [key]: e.target.value }));
+    setError("");
+  };
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
-    setSent(true);
+
+    setSending(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const result = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        setError(result.error || "We couldn't send your message. Please try again.");
+        return;
+      }
+
+      setSent(true);
+    } catch {
+      setError("We couldn't send your message. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -85,12 +111,12 @@ export default function ContactPage() {
                         <img alt="LinkedIn" className="absolute block inset-0 max-w-none size-full" src="/assets/icons/linkedin-02.svg" />
                       </div>
                     </a>
-                    <a href="#" aria-label="Instagram" className="bg-[#1b1819] flex items-center justify-center relative rounded-[40px] shrink-0 size-[40px] transition-transform duration-200 hover:-translate-y-0.5">
+                    <a href="https://www.instagram.com/_plucia_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="bg-[#1b1819] flex items-center justify-center relative rounded-[40px] shrink-0 size-[40px] transition-transform duration-200 hover:-translate-y-0.5">
                       <div className="relative shrink-0 size-[16px]">
                         <img alt="Instagram" className="absolute block inset-0 max-w-none size-full" src="/assets/icons/instagram-footer.svg" />
                       </div>
                     </a>
-                    <a href="https://x.com/plucia_ai?s=11" target="_blank" rel="noopener noreferrer" aria-label="X" className="bg-[#1b1819] flex items-center justify-center relative rounded-[40px] shrink-0 size-[40px] transition-transform duration-200 hover:-translate-y-0.5">
+                    <a href="https://x.com/plucia_ai" target="_blank" rel="noopener noreferrer" aria-label="X" className="bg-[#1b1819] flex items-center justify-center relative rounded-[40px] shrink-0 size-[40px] transition-transform duration-200 hover:-translate-y-0.5">
                       <div className="relative shrink-0 size-[16px]">
                         <img alt="X" className="absolute block inset-0 max-w-none size-full" src="/assets/icons/new-twitter.svg" />
                       </div>
@@ -125,7 +151,10 @@ export default function ContactPage() {
                   <TextField label="Phone Number" type="tel" placeholder="Your phone number" value={form.phone} onChange={update("phone")} />
                   <TextField label="Email address" type="email" placeholder="you@company.com" value={form.email} onChange={update("email")} required />
                   <TextAreaField label="Message" placeholder="Type something here." rows={5} value={form.message} onChange={update("message")} required />
-                  <DarkButton type="submit" className="w-full">Send a message</DarkButton>
+                  {error && <p className="font-inter text-[#d03030] text-[13px]">{error}</p>}
+                  <DarkButton type="submit" disabled={sending} className="w-full">
+                    {sending ? "Sending…" : "Send a message"}
+                  </DarkButton>
                 </form>
               )}
             </motion.div>

@@ -47,7 +47,7 @@ export default function HeroComposer() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter") router.push("/signup");
+            if (e.key === "Enter") router.push("/waitlist");
           }}
           type="text"
           placeholder="Ask anything...."
@@ -160,7 +160,7 @@ export default function HeroComposer() {
         <button
           type="button"
           aria-label="Send"
-          onClick={() => router.push("/signup")}
+          onClick={() => router.push("/waitlist")}
           className="flex flex-col items-center justify-center overflow-clip p-[12px] relative rounded-[12px] shadow-[0px_6.866px_6.866px_-2.333px_rgba(0,0,0,0.16),0px_13.647px_13.647px_-2.917px_rgba(0,0,0,0.16),0px_30px_30px_-3.5px_rgba(0,0,0,0.08)] shrink-0 size-[40px] cursor-pointer"
         >
           <div aria-hidden className="absolute bg-[#202020] inset-0 pointer-events-none rounded-[12px]" />

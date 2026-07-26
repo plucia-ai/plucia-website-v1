@@ -29,7 +29,7 @@ export default function LoginPage() {
 
   return (
     <main className="bg-white flex flex-col min-h-screen w-full">
-      <AuthHeader prompt="New to Plucia?" linkText="Get Started" linkHref="/signup" />
+      <AuthHeader prompt="New to Plucia?" linkText="Get Started" linkHref="/waitlist" />
 
       <div className="flex flex-1 items-start sm:items-center justify-center px-[20px] pb-[80px] pt-[48px] sm:pt-0 w-full">
         <motion.div
@@ -69,7 +69,7 @@ export default function LoginPage() {
             {notice && (
               <div className="bg-[#e7ffe5] border border-[#34a853] border-solid font-inter px-[16px] py-[12px] rounded-[10px] text-[#202020] text-[14px]">
                 Plucia is in early access and accounts are invite-only for now.{" "}
-                <Link href="/signup" className="font-semibold underline underline-offset-4">
+                <Link href="/waitlist" className="font-semibold underline underline-offset-4">
                   Get Started
                 </Link>{" "}
                 to join.

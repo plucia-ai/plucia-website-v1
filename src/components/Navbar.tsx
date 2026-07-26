@@ -42,12 +42,12 @@ export default function Navbar() {
         </Link>
       )}
       <div className="flex gap-[4px] items-center relative shrink-0">
-        <Link href="/login" className="hidden sm:flex items-center justify-center px-[20px] py-[10px] relative rounded-[8px] shrink-0 cursor-pointer">
+        <Link href="/waitlist" className="hidden sm:flex items-center justify-center px-[20px] py-[10px] relative rounded-[8px] shrink-0 cursor-pointer">
           <p className="font-manrope font-semibold leading-[normal] relative shrink-0 text-[#202020] text-[16px] whitespace-nowrap">
             Sign In
           </p>
         </Link>
-        <Link href="/signup" className="group flex items-center overflow-clip px-[16px] sm:px-[24px] py-[10px] sm:py-[12px] relative rounded-[8px] shadow-[0px_0px_0px_0.8px_#161616,0px_6.866px_6.866px_-2.333px_rgba(0,0,0,0.16),0px_13.647px_13.647px_-2.917px_rgba(0,0,0,0.16),0px_30px_30px_-3.5px_rgba(0,0,0,0.08)] shrink-0 cursor-pointer transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0px_0px_0px_0.8px_#161616,0px_10px_10px_-3px_rgba(0,0,0,0.22),0px_18px_18px_-3px_rgba(0,0,0,0.2),0px_36px_34px_-4px_rgba(0,0,0,0.12)]">
+        <Link href="/waitlist" className="group flex items-center overflow-clip px-[16px] sm:px-[24px] py-[10px] sm:py-[12px] relative rounded-[8px] shadow-[0px_0px_0px_0.8px_#161616,0px_6.866px_6.866px_-2.333px_rgba(0,0,0,0.16),0px_13.647px_13.647px_-2.917px_rgba(0,0,0,0.16),0px_30px_30px_-3.5px_rgba(0,0,0,0.08)] shrink-0 cursor-pointer transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0px_0px_0px_0.8px_#161616,0px_10px_10px_-3px_rgba(0,0,0,0.22),0px_18px_18px_-3px_rgba(0,0,0,0.2),0px_36px_34px_-4px_rgba(0,0,0,0.12)]">
           <div
             aria-hidden
             className="absolute inset-0 pointer-events-none rounded-[8px]"
