@@ -14,6 +14,10 @@ type WaitlistRequest = {
 const welcomeFrom = () =>
   process.env.WAITLIST_FROM_EMAIL || "Plucia <support@plucia.com>";
 
+type WelcomeDelivery =
+  | { status: "sent"; emailId: string }
+  | { status: "already-sent" };
+
 async function sendPendingWelcome(email: string) {
   const sql = getDatabase();
   const claimed = await sql`
@@ -35,12 +39,29 @@ async function sendPendingWelcome(email: string) {
     RETURNING subscribers.id
   `;
 
-  if (!claimed[0]) return;
+  if (!claimed[0]) {
+    const existing = await sql`
+      SELECT welcome_sent_at, welcome_processing_at
+      FROM waitlist_subscribers
+      WHERE email = ${email}
+      LIMIT 1
+    `;
+
+    if (existing[0]?.welcome_sent_at) {
+      return { status: "already-sent" } satisfies WelcomeDelivery;
+    }
+
+    throw new Error(
+      existing[0]?.welcome_processing_at
+        ? "The welcome email is already being processed."
+        : "The waitlist subscriber could not be found."
+    );
+  }
 
   const subscriberId = String(claimed[0].id);
 
   try {
-    await sendEmail({
+    const delivery = await sendEmail({
       from: welcomeFrom(),
       to: [email],
       subject: "Welcome to Plucia — you're on the list",
@@ -79,6 +100,11 @@ async function sendPendingWelcome(email: string) {
       SET welcome_sent_at = NOW(), welcome_processing_at = NULL
       WHERE id = ${subscriberId}
     `;
+
+    return {
+      status: "sent",
+      emailId: delivery.id,
+    } satisfies WelcomeDelivery;
   } catch (error) {
     await sql`
       UPDATE waitlist_subscribers
@@ -245,19 +271,33 @@ export async function POST(request: Request) {
       RETURNING id
     `;
 
-    const deliveries = await Promise.allSettled([
-      sendPendingWelcome(email),
-      sendPendingBatchReport(),
-    ]);
-    deliveries.forEach((delivery) => {
-      if (delivery.status === "rejected") {
-        console.error("Waitlist email delivery failed:", delivery.reason);
-      }
-    });
+    let welcomeDelivery: WelcomeDelivery;
+
+    try {
+      welcomeDelivery = await sendPendingWelcome(email);
+    } catch (error) {
+      console.error("Waitlist welcome email delivery failed:", error);
+      return NextResponse.json(
+        {
+          error:
+            "Your email was saved, but we couldn't send your welcome email. Please try again.",
+          emailSent: false,
+        },
+        { status: 502 }
+      );
+    }
+
+    try {
+      await sendPendingBatchReport();
+    } catch (error) {
+      console.error("Waitlist batch report delivery failed:", error);
+    }
 
     return NextResponse.json({
       ok: true,
       alreadySubscribed: inserted.length === 0,
+      emailSent: true,
+      welcomeDelivery: welcomeDelivery.status,
     });
   } catch (error) {
     console.error("Waitlist submission failed:", error);
