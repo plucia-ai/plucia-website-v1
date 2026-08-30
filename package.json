@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:migrate": "bun run database/migrate.ts",
+    "db:import": "bun run database/import_data.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",

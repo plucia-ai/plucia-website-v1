@@ -84,8 +84,8 @@ export default function Hero() {
 
       <div className="relative mx-auto w-full max-w-[1440px] px-[20px] sm:px-[48px] xl:px-[152px] pt-[150px] sm:pt-[178px] lg:pt-[clamp(150px,17vh,218px)]">
         <motion.div className="flex flex-col gap-[24px] items-center mx-auto w-full max-w-[725px]" initial={entrance} animate={contentAnimation} transition={reveal(0.06, 1.1)}>
-          <div className="flex flex-col gap-[4px] items-center relative shrink-0 w-full">
-            {/* <AvatarGroup /> */}<br />
+          <div className="flex flex-col gap-[16px] items-center relative shrink-0 w-full">
+            <AvatarGroup />
             <p className="font-manrope font-semibold leading-[normal] relative shrink-0 text-[clamp(34px,6vw,50px)] text-black text-center tracking-[-0.05em] w-full">
               <DistortText text="Meet Your AI Business Operator" />
             </p>

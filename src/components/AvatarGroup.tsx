@@ -1,5 +1,38 @@
-/** Overlapping waitlist avatars + count. Used in the hero and the subscription CTA. */
-export default function AvatarGroup({ light = false }: { light?: boolean }) {
+"use client";
+
+import { useEffect, useState } from "react";
+
+/** Overlapping waitlist avatars + dynamic count fetched from /api/waitlist. */
+export default function AvatarGroup({
+  light = false,
+  initialCount = 50489,
+}: {
+  light?: boolean;
+  initialCount?: number;
+}) {
+  const [count, setCount] = useState<number>(initialCount);
+
+  useEffect(() => {
+    let mounted = true;
+    fetch("/api/waitlist")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch waitlist count");
+        return res.json();
+      })
+      .then((data: { ok?: boolean; total?: number }) => {
+        if (mounted && typeof data.total === "number" && data.total > 0) {
+          setCount(data.total);
+        }
+      })
+      .catch((err) => {
+        console.warn("Could not load dynamic waitlist count:", err);
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <div className="flex flex-wrap gap-[10px] items-center justify-center relative shrink-0">
       <div className="flex items-center relative shrink-0">
@@ -26,8 +59,8 @@ export default function AvatarGroup({ light = false }: { light?: boolean }) {
         </div>
       </div>
       <p className={`font-inter font-normal leading-[0] relative shrink text-[14px] sm:text-[16px] text-center tracking-[-0.05em] ${light ? "text-[#fefefe]" : "text-[#202020]"}`}>
-        <span className="font-bold leading-[normal]">7,136 </span>
-        <span className="leading-[normal]">people already Subscribe to Plucia's updates</span>
+        <span className="font-bold leading-[normal]">{count.toLocaleString()} </span>
+        <span className="leading-[normal]">people already joined Plucia&apos;s waitlist</span>
       </p>
     </div>
   );

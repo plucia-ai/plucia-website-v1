@@ -307,3 +307,63 @@ export async function POST(request: Request) {
     );
   }
 }
+
+export async function GET(request: Request) {
+  try {
+    await ensureDatabaseSchema();
+    const sql = getDatabase();
+    const url = new URL(request.url);
+    const emailParam = url.searchParams.get("email")?.trim().toLowerCase();
+
+    if (emailParam) {
+      const subscriber = await sql`
+        SELECT id, email, source, created_at, welcome_sent_at
+        FROM waitlist_subscribers
+        WHERE email = ${emailParam}
+        LIMIT 1;
+      `;
+
+      if (subscriber.length > 0) {
+        return NextResponse.json({
+          ok: true,
+          exists: true,
+          subscriber: subscriber[0],
+        });
+      }
+
+      return NextResponse.json({
+        ok: true,
+        exists: false,
+      });
+    }
+
+    // Return overall count and breakdown by source
+    const countRes = await sql`SELECT COUNT(*)::BIGINT AS count FROM waitlist_subscribers;`;
+    const totalCount = Number(countRes[0]?.count || 0);
+
+    const sourceRows = await sql`
+      SELECT source, COUNT(*)::BIGINT AS count
+      FROM waitlist_subscribers
+      GROUP BY source
+      ORDER BY count DESC;
+    `;
+
+    const sources: Record<string, number> = {};
+    for (const row of sourceRows) {
+      sources[String(row.source)] = Number(row.count);
+    }
+
+    return NextResponse.json({
+      ok: true,
+      total: totalCount,
+      sources,
+    });
+  } catch (error) {
+    console.error("Failed to retrieve waitlist details:", error);
+    return NextResponse.json(
+      { error: "Failed to retrieve waitlist data." },
+      { status: 500 }
+    );
+  }
+}
+
