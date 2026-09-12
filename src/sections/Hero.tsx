@@ -87,7 +87,7 @@ export default function Hero() {
           <div className="flex flex-col gap-[16px] items-center relative shrink-0 w-full">
             <AvatarGroup />
             <p className="font-manrope font-semibold leading-[normal] relative shrink-0 text-[clamp(34px,6vw,50px)] text-black text-center tracking-[-0.05em] w-full">
-              <DistortText text="Meet Your AI Business Operator" />
+              <DistortText text="AI Company Brain In One Inbox" />
             </p>
           </div>
           <div className="font-inter font-normal leading-[0] relative shrink-0 text-[#202020] text-[16px] sm:text-[18px] text-center tracking-[-0.05em] w-full max-w-[544px]">
