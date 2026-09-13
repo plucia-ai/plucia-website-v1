@@ -33,7 +33,7 @@ const msMadi = Ms_Madi({
 const caveat = Caveat({ subsets: ["latin"], variable: "--font-hand" });
 
 export const metadata: Metadata = {
-  title: "Plucia — Meet Your AI Business Operator",
+  title: "Plucia — AI Company Brain In One Inbox",
   description:
     "Understands buyer intent, detects opportunities, engages. And your sales pipeline keeps moving.",
 };
