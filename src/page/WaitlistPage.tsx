@@ -65,7 +65,7 @@ export default function WaitlistPage() {
             <TextField
               label="Email"
               type="email"
-              placeholder="you@company.com"
+              placeholder="Your email address"
               value={email}
               autoFocus
               required
