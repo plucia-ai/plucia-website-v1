@@ -11,7 +11,7 @@ import {
 } from "framer-motion";
 
 /**
- * Dashboard screenshot below the hero — scroll-linked scale-up, similar to
+ * Dashboard screenshot below the hero - scroll-linked scale-up, similar to
  * the settle-into-frame effect on antigravity.google's video section: the
  * framed container starts slightly scaled down and offset, then smoothly grows
  * to its resting scale/position as it scrolls into view. Driven by scroll
@@ -23,7 +23,7 @@ import {
  * under the dashboard, so the line reads as plugging into it. Tiles and lines
  * live on one layer behind the dashboard sharing its entrance transform; each
  * tile then adds its own scroll parallax with a distinct travel distance,
- * direction and spring stiffness so they move independently. xl+ only — below
+ * direction and spring stiffness so they move independently. xl+ only - below
  * that the side padding is too tight to fit the tiles without clipping.
  */
 
@@ -39,7 +39,7 @@ type TileSpec = {
   rotate: number;
   depth: number; // parallax travel in px (sign = direction)
   drift: number; // vertical offset of the line's far end under the dashboard
-  stiffness: number; // per-tile spring — lower lags more behind the scroll
+  stiffness: number; // per-tile spring - lower lags more behind the scroll
 };
 
 const TILES: TileSpec[] = [
@@ -131,7 +131,7 @@ export default function DashboardShowcase() {
   const startScale = 0.88;
   const endScale = 1.08;
   const rawScale = useTransform(scrollYProgress, [0, 1], [startScale, endScale]);
-  const rawY = useTransform(scrollYProgress, [0, 1], [16, 0]);
+  const rawY = useTransform(scrollYProgress, [0, 1], [24, 0]);
   const spring = { stiffness: 87, damping: 24, mass: 0.8 };
   const scale = useSpring(rawScale, spring);
   const y = useSpring(rawY, spring);
@@ -146,9 +146,9 @@ export default function DashboardShowcase() {
   return (
     <div
       ref={ref}
-      className="relative mx-auto mt-[20px] sm:mt-[28px] lg:mt-[36px] w-full max-w-[1300.5px]"
+      className="relative mx-auto mt-[36px] sm:mt-[48px] lg:mt-[56px] mb-[48px] sm:mb-[64px] lg:mb-[80px] w-full max-w-[1300.5px]"
     >
-      {/* floating app tiles + connector lines — behind the dashboard so the
+      {/* floating app tiles + connector lines - behind the dashboard so the
           lines vanish under its edge; shares the entrance transform */}
       <motion.div aria-hidden className="absolute hidden inset-0 pointer-events-none xl:block z-0 origin-top" style={entrance}>
         {TILES.map((t) => (

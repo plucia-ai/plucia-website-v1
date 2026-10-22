@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import Reveal from "@/components/Reveal";
 import Hero from "@/sections/Hero";
 import IntegrationsMarquee from "@/sections/IntegrationsMarquee";
-import BackedBySection from "@/sections/BackedBySection";
 import PlatformSection from "@/sections/PlatformSection";
 import AutomationSection from "@/sections/AutomationSection";
 import TellPluciaSection from "@/sections/TellPluciaSection";
@@ -34,7 +33,6 @@ export default function HomePage() {
       </header>
       <Hero />
       <IntegrationsMarquee />
-      <BackedBySection />
       <div className="max-w-[1440px] mx-auto relative w-full space-y-[88px] mt-[88px]">
         <Reveal><TellPluciaSection /></Reveal>
         <Reveal><CalendarSection /></Reveal>

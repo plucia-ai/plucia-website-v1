@@ -6,15 +6,16 @@ import AvatarGroup from "@/components/AvatarGroup";
 import DistortText from "@/components/DistortText";
 import HeroComposer from "@/components/HeroComposer";
 import TryYourselfLabel from "@/components/TryYourselfLabel";
+import HeroBadges from "@/components/HeroBadges";
 import DashboardShowcase from "@/components/DashboardShowcase";
 
 type HeroBounds = { height: number; horizontalInset: number; topInset: number };
 
 function getHeroBounds(): HeroBounds {
   const width = window.innerWidth;
-  if (width >= 1024) return { height: 942, horizontalInset: 29, topInset: 14 };
-  if (width >= 640) return { height: 780, horizontalInset: 29, topInset: 14 };
-  return { height: 640, horizontalInset: 16, topInset: 8 };
+  if (width >= 1024) return { height: 960, horizontalInset: 29, topInset: 14 };
+  if (width >= 640) return { height: 800, horizontalInset: 29, topInset: 14 };
+  return { height: 660, horizontalInset: 16, topInset: 8 };
 }
 
 export default function Hero() {
@@ -33,7 +34,7 @@ export default function Hero() {
     return () => window.removeEventListener("resize", updateBounds);
   }, []);
 
-  // The background video keeps decoding while scrolled far offscreen —
+  // The background video keeps decoding while scrolled far offscreen -
   // pause it there so the rest of the page scrolls without that cost.
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
@@ -101,13 +102,21 @@ export default function Hero() {
           <TryYourselfLabel />
         </motion.div>
 
+        <motion.div className="relative z-10 mx-auto mt-[40px] sm:mt-[52px] lg:mt-[58px]" initial={entrance} animate={contentAnimation} transition={reveal(0.15, 1.1)}>
+          <HeroBadges />
+        </motion.div>
+
         <motion.div initial={entrance} animate={contentAnimation} transition={reveal(0.18, 1.15)}>
           <DashboardShowcase />
         </motion.div>
 
-        <motion.div className="font-inter font-normal leading-[0] mx-auto mt-[40px] lg:mt-[68px] pb-[8px] text-[#202020] text-[16px] sm:text-[18px] text-center tracking-[-0.05em] w-full max-w-[544px]" initial={entrance} animate={contentAnimation} transition={reveal(0.24, 1.0)}>
-          <p className="leading-[normal] mb-0">Our AI Agents do end to end conversations on behalf of you.</p>
-          
+        <motion.div
+          className="mx-auto text-center font-inter text-[16px] sm:text-[18px] font-normal tracking-[-0.03em] text-[#404040] max-w-[544px] pb-[8px]"
+          initial={entrance}
+          animate={contentAnimation}
+          transition={reveal(0.24, 1.0)}
+        >
+          <p className="leading-[normal]">Our AI Agents do end to end conversations on behalf of you.</p>
         </motion.div>
       </div>
     </section>

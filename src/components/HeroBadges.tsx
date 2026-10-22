@@ -1,10 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import React from "react";
 
-/**
- * Official NVIDIA Eye vector mark (viewBox="0 0 46 30", fill="#76B900").
- */
 function NvidiaLogo({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 46 30" fill="none" className={className} aria-hidden>
@@ -16,9 +13,6 @@ function NvidiaLogo({ className }: { className?: string }) {
   );
 }
 
-/**
- * Official Google 4-color G vector mark (viewBox="0 0 24 24").
- */
 function GoogleLogo({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
@@ -42,9 +36,6 @@ function GoogleLogo({ className }: { className?: string }) {
   );
 }
 
-/**
- * Official Amazon Web Services (AWS) logo mark (viewBox="0 0 304 182").
- */
 function AwsLogo({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 304 182" fill="none" className={className} aria-hidden>
@@ -64,54 +55,54 @@ function AwsLogo({ className }: { className?: string }) {
   );
 }
 
-const PROGRAMS = [
-  {
-    name: "NVIDIA Inception Program",
-    icon: <NvidiaLogo className="h-[22px] sm:h-[26px] w-auto shrink-0" />,
-  },
-  {
-    name: "Google for Startups Cloud Program",
-    icon: <GoogleLogo className="size-[22px] sm:size-[26px] shrink-0" />,
-  },
-  {
-    name: "AWS Activate",
-    icon: <AwsLogo className="h-[20px] sm:h-[24px] w-auto shrink-0" />,
-  },
-];
-
-export default function BackedBySection() {
-  const reduceMotion = useReducedMotion();
-
+export default function HeroBadges() {
   return (
-    <motion.section
-      initial={reduceMotion ? false : { opacity: 0, scale: 0.96 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 1.0, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-      className="relative mx-auto mt-[64px] lg:mt-[80px] w-full max-w-[1440px] px-[20px]"
-    >
-      {/* divider lines + pill (exact 1:1 match to INTEGRATIONS frame) */}
-      <div className="flex items-center justify-center gap-[16px]">
-        <div className="h-px w-full max-w-[225px] bg-[#e5e5e5]" />
-        <div className="flex items-center justify-center rounded-full border border-[#e5e5e5] bg-white px-[20px] py-[9px]">
-          <p className="font-inter font-medium text-[13px] tracking-[0.08em] text-[#202020] whitespace-nowrap">
-            BACKED BY
-          </p>
-        </div>
-        <div className="h-px w-full max-w-[225px] bg-[#e5e5e5]" />
+    <div className="flex flex-col items-center gap-[12px] sm:gap-[14px]">
+      {/* Subtle hairline framed label */}
+      <div className="flex items-center gap-[12px] opacity-80">
+        <span className="h-px w-[28px] sm:w-[36px] bg-[#202020]/15" />
+        <span className="font-inter font-medium text-[11px] sm:text-[12px] uppercase tracking-[0.14em] text-[#555]">
+          Backed by
+        </span>
+        <span className="h-px w-[28px] sm:w-[36px] bg-[#202020]/15" />
       </div>
 
-      {/* Program marks (clean brand lockups, no pills, no pfp, no hover) */}
-      <div className="mt-[48px] sm:mt-[56px] flex flex-wrap items-center justify-center gap-[36px] sm:gap-[56px] lg:gap-[72px]">
-        {PROGRAMS.map((program) => (
-          <div key={program.name} className="flex items-center gap-[10px] sm:gap-[12px]">
-            {program.icon}
-            <span className="font-inter font-medium text-[15px] sm:text-[17px] tracking-[-0.02em] text-[#202020] whitespace-nowrap">
-              {program.name}
-            </span>
+      {/* Badges row with refined typography and delicate dividers */}
+      <div className="flex flex-wrap items-center justify-center gap-x-[20px] sm:gap-x-[28px] lg:gap-x-[36px] gap-y-[12px]">
+        {/* NVIDIA Inception Program */}
+        <div className="flex items-center gap-[8px] sm:gap-[9px]">
+          <div className="flex h-[20px] sm:h-[22px] items-center">
+            <NvidiaLogo className="h-[17px] sm:h-[19px] w-auto shrink-0" />
           </div>
-        ))}
+          <span className="font-inter text-[13px] sm:text-[14px] tracking-[-0.015em] text-[#202020] whitespace-nowrap">
+            <span className="font-semibold text-black">NVIDIA</span> Inception Program
+          </span>
+        </div>
+
+        <div className="hidden sm:block h-[14px] w-px bg-[#202020]/15 shrink-0" aria-hidden />
+
+        {/* Google for Startups Cloud Program */}
+        <div className="flex items-center gap-[8px] sm:gap-[9px]">
+          <div className="flex h-[20px] sm:h-[22px] items-center">
+            <GoogleLogo className="size-[17px] sm:size-[19px] shrink-0" />
+          </div>
+          <span className="font-inter text-[13px] sm:text-[14px] tracking-[-0.015em] text-[#202020] whitespace-nowrap">
+            <span className="font-semibold text-black">Google for Startups</span> Cloud Program
+          </span>
+        </div>
+
+        <div className="hidden sm:block h-[14px] w-px bg-[#202020]/15 shrink-0" aria-hidden />
+
+        {/* AWS Activate */}
+        <div className="flex items-center gap-[7px] sm:gap-[8px]">
+          <div className="flex h-[20px] sm:h-[22px] items-center pt-[1px]">
+            <AwsLogo className="h-[15px] sm:h-[17px] w-auto shrink-0" />
+          </div>
+          <span className="font-inter text-[13px] sm:text-[14px] tracking-[-0.015em] text-[#202020] whitespace-nowrap font-semibold text-black">
+            Activate
+          </span>
+        </div>
       </div>
-    </motion.section>
+    </div>
   );
 }

@@ -41,7 +41,7 @@ export default function IntegrationsMarquee() {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, amount: 0.5 }}
       transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="relative mx-auto mt-[80px] lg:mt-[120px] w-full max-w-[1440px] px-[20px]"
+      className="relative mx-auto mt-[48px] sm:mt-[64px] lg:mt-[76px] w-full max-w-[1440px] px-[20px]"
     >
       {/* divider lines + pill */}
       <div className="flex items-center justify-center gap-[16px]">
