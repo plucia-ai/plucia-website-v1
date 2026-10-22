@@ -131,7 +131,7 @@ export default function DashboardShowcase() {
   const startScale = 0.88;
   const endScale = 1.08;
   const rawScale = useTransform(scrollYProgress, [0, 1], [startScale, endScale]);
-  const rawY = useTransform(scrollYProgress, [0, 1], [64, 0]);
+  const rawY = useTransform(scrollYProgress, [0, 1], [16, 0]);
   const spring = { stiffness: 87, damping: 24, mass: 0.8 };
   const scale = useSpring(rawScale, spring);
   const y = useSpring(rawY, spring);
@@ -146,11 +146,11 @@ export default function DashboardShowcase() {
   return (
     <div
       ref={ref}
-      className="relative mx-auto mt-[44px] sm:mt-[70px] lg:mt-[clamp(50px,7vh,104px)] w-full max-w-[1300.5px]"
+      className="relative mx-auto mt-[20px] sm:mt-[28px] lg:mt-[36px] w-full max-w-[1300.5px]"
     >
       {/* floating app tiles + connector lines — behind the dashboard so the
           lines vanish under its edge; shares the entrance transform */}
-      <motion.div aria-hidden className="absolute hidden inset-0 pointer-events-none xl:block z-0" style={entrance}>
+      <motion.div aria-hidden className="absolute hidden inset-0 pointer-events-none xl:block z-0 origin-top" style={entrance}>
         {TILES.map((t) => (
           <Tile key={t.alt} spec={t} parallax={parallax} still={!!reduceMotion} />
         ))}
@@ -158,7 +158,7 @@ export default function DashboardShowcase() {
 
       <motion.div
         style={entrance}
-        className="relative z-[1] border border-solid border-white aspect-[1107.5/787.5] overflow-clip rounded-[12px] lg:rounded-[18px] shadow-[0px_4px_30px_-13px_rgba(0,0,0,0.15)] w-full"
+        className="origin-top relative z-[1] border border-solid border-white aspect-[1107.5/787.5] overflow-clip rounded-[12px] lg:rounded-[18px] shadow-[0px_4px_30px_-13px_rgba(0,0,0,0.15)] w-full"
       >
         <img
           alt="Plucia dashboard"
